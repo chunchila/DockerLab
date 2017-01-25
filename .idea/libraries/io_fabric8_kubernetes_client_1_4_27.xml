@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="io.fabric8:kubernetes-client:1.4.27" type="repository">
+    <properties maven-id="io.fabric8:kubernetes-client:1.4.27" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/kubernetes-client-1.4.27.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/kubernetes-model-1.0.64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-module-jaxb-annotations-2.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-annotations-2.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/validation-api-1.1.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okhttp-3.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okio-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/logging-interceptor-3.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/okhttp-ws-3.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jul-to-slf4j-1.7.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-dataformat-yaml-2.7.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/snakeyaml-1.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/zjsonpatch-0.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/generex-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/automaton-1.11-8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tools.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/kubernetes-client-1.4.27-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/kubernetes-client-1.4.27-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
