@@ -134,10 +134,15 @@ public class Main extends Application {
         final String nameSpaceName = InetAddress.getLocalHost().getHostName().toLowerCase();
 
 
-        createNameSpace(kubernetesClient, nameSpaceName, stringStringHashMap);
+        try {
+            createNameSpace(kubernetesClient, nameSpaceName, stringStringHashMap);
 
 
-        kubeFillListView(kubeGetDeployments(kubernetesClient, nameSpaceName), listViewKube);
+            kubeFillListView(kubeGetDeployments(kubernetesClient, nameSpaceName), listViewKube);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
 
         btnGetDocker.setOnAction(new EventHandler<ActionEvent>() {

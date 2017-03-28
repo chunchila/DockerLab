@@ -1,13 +1,10 @@
 package sample;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
+import org.jsoup.Jsoup;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
 
 /**
  * Created by Dirt on 2/21/2017.
@@ -20,32 +17,15 @@ public class DockerTags {
 
 
     public static void main(String[] args) throws IOException {
-        URL url = new URL("http://www.walla.co.il");
 
-        URLConnection urlConnection = url.openConnection();
+        String text = Jsoup.connect("http://www.ynet.co.il").validateTLSCertificates(false).ignoreContentType(true).userAgent("Mozilla").get().text();
 
-
-        BufferedInputStream bufferedInputStream = new BufferedInputStream((urlConnection.getInputStream()));
+        String [] arr = text.split("\n");
 
 
-        InputStreamReader inputStreamReader = new InputStreamReader(urlConnection.getInputStream());
-
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-        String inputLine = "";
-
-
-        while ((inputLine = bufferedReader.readLine()) != null) {
-
-
-            System.out.println(inputLine);
-
-
+        for (String s : arr) {
+            System.out.println(s);
         }
-        bufferedReader.close();
-
 
     }
 }
