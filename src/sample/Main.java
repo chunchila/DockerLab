@@ -25,6 +25,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +35,30 @@ import java.util.Random;
 
 public class Main extends Application {
 
+    boolean useHTTPS = false;
 
-    private String kubeUrl = "http://192.168.1.71:8080/r/projects/1a12/kubernetes";
+
+    private boolean isUseHTTPS() {
+        return useHTTPS;
+    }
+
+
+    private String kubeUrl = "http://192.168.1.71:8080/r/projects/1a21/kubernetes";
     private String dockerUrl = "tcp://192.168.1.71:2375";
 
+    KubernetesClient kubernetesClient;
+    DockerClient dockerClient;
+
+
+    boolean isOK;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         primaryStage.setTitle("Docker Lab");
+
+        isOK = checkPort("192.168.1.71", 8080);
+        isOK = checkPort("192.168.1.71", 2375);
 
 
         VBox vbox = new VBox();
@@ -101,8 +119,12 @@ public class Main extends Application {
 
 
         // init the Components
-        DockerClient dockerClient = dockerConnect(dockerUrl);
-        KubernetesClient kubernetesClient = kubeConnect(kubeUrl);
+        if (isOK) {
+
+
+            dockerClient = dockerConnect(dockerUrl);
+            kubernetesClient = kubeConnect(kubeUrl);
+        }
 
 
         // Create my NameSpace
@@ -171,16 +193,36 @@ public class Main extends Application {
 
                 stringMap.put("moshe", "haim");
 
-                String containerName = listViewDocker.getSelectionModel().getSelectedItem();
+                ObservableList<String> containerNames = listViewDocker.getSelectionModel().getSelectedItems();
+                for (String containerName : containerNames) {
 
 
-                int rand = new Random().nextInt(452345346);
-                kubeDeploy(kubernetesClient, containerName.replace("/", "-") + "-" + rand, stringMap, containerName, nameSpaceName);
-                clearListView(listViewKube);
-                kubeFillListView(kubeGetDeployments(kubernetesClient, nameSpaceName), listViewKube);
+                    int rand = new Random().nextInt(452345346);
+                    kubeDeploy(kubernetesClient, containerName.replace("/", "-") + "-" + rand, stringMap, containerName, nameSpaceName);
+                    clearListView(listViewKube);
+                    kubeFillListView(kubeGetDeployments(kubernetesClient, nameSpaceName), listViewKube);
+                }
             }
 
         });
+
+
+    }
+
+    private boolean checkPort(String host, int port) {
+
+
+        try {
+
+            new Socket().connect(new InetSocketAddress(host, port), 5);
+        } catch (java.io.IOException e) {
+
+
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        return true;
 
 
     }
@@ -301,6 +343,7 @@ public class Main extends Application {
         System.out.println("deploy created " + createdDeploy.toString());
 
     }
+
 
     public static void main(String[] args) {
         launch(args);
